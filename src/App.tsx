@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import UserCard from "./components/UserCard";
 import { getUserUrl } from "./config/urlConst";
 import useFetch from "./hooks/useFetch";
@@ -51,7 +51,7 @@ function App() {
   return (
     <>
       {loading && <Loader />}
-      {!loading && (
+      {!loading && userList?.length !== 0 && (
         <Box sx={{ display: "flex", flexWrap: "wrap", padding: "46px" }}>
           {userList.map((user: userType, index: number) => {
             return (
@@ -70,6 +70,31 @@ function App() {
             handleClose={() => setEditableData(null)}
             onEdit={handleUpdate}
           />
+        </Box>
+      )}
+      {!userList?.length && (
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            padding: "46px",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "80vh"
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "24px",
+              fontWeight: "400",
+              lineHeight: "18px",
+              color: "#363636",
+              margin: "0 0 10px",
+            }}
+          >
+            NO DATA
+          </Typography>
         </Box>
       )}
     </>
